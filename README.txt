@@ -1,5 +1,5 @@
 This is a python implementation of the classic diamond-square algorithm for 2-D height maps,
-which are often used for terrain creation. 
+which are often used for terrain generation and random map creation. 
 
 
 Feel free to post questions or requests, and I'll see what I can do.
