@@ -36,6 +36,7 @@ def diamond_square(desired_size, min_height, max_height, roughness, random_seed=
     OTHER NOTES:
     Internally, all heights are between 0 and 1, and are rescaled at the end.
 
+
     PARAMETERS
     ----------
 
@@ -124,7 +125,6 @@ def diamond_square(desired_size, min_height, max_height, roughness, random_seed=
         return final_array.tolist()
 
 
-
 def get_DS_size_and_iters(requested_size, max_power_of_two=13):
     """Returns the necessary size for a square grid which is usable in a DS algorithm.
 
@@ -164,6 +164,7 @@ def get_DS_size_and_iters(requested_size, max_power_of_two=13):
     d = 2**max_power_of_two + 1
     print("DiamondSquare Warning: Requested size was too large. Grid of size {0} returned""".format(d))
     return d, max_power_of_two
+
 
 def diamond_step(DS_array, step_size, roughness):
     """Does the diamond step for a given iteration.
@@ -234,6 +235,7 @@ def diamond_displace(DS_array, i, j, half_step, roughness):
 
     return (roughness*rand_val + (1.0-roughness)*ave)
 
+
 #defines the midpoint displacement for the square step
 def square_displace(DS_array, i, j, half_step, roughness):
     _sum = 0.0
@@ -269,3 +271,4 @@ def square_displace(DS_array, i, j, half_step, roughness):
     rand_val = random.uniform(0,1)
 
     return (roughness*rand_val + (1.0-roughness)*ave)
+
