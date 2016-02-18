@@ -39,17 +39,16 @@ def diamond_square(desired_size, min_height, max_height, roughness, random_seed=
 
     PARAMETERS
     ----------
-
     size
         The size of the grid to be returned. If an integer is passed, the return grid will
         have sides of this length. If an array-like is passed, the first two values will be 
         used as the array shape.
 
-    max_height
-        The maximum height allowed on the landscape
-
     min_height
         The minimum height allowed on the landscape
+
+    max_height
+        The maximum height allowed on the landscape
 
     roughness
         A float with value between 0 and 1, reflecting how bumpy the landscape should be. 

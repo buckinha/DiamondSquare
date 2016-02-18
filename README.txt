@@ -37,6 +37,9 @@ np.array_equal(same_map_1, different_map)
 
 ------------------------------------------------------
 
+FUNCTION SIGNATURE
+diamond_square(size, min_height, max_height, roughness, random_seed=None, AS_NP_ARRAY=False)
+
 PARAMETERS
 ----------
 
@@ -45,11 +48,11 @@ size
     have sides of this length. If an array-like is passed, the first two values will be 
     used as the array shape.
 
-max_height
-    The maximum height allowed on the landscape
-
 min_height
     The minimum height allowed on the landscape
+
+max_height
+    The maximum height allowed on the landscape
 
 roughness
     A float with value between 0 and 1, reflecting how bumpy the landscape should be. 
