@@ -6,7 +6,7 @@
 import random
 import numpy as np
 
-def diamond_square(desired_size, min_height, max_height, roughness, random_seed=None, AS_NP_ARRAY=True):
+def diamond_square(desired_size, min_height, max_height, roughness, random_seed=None, AS_NP_ARRAY=False):
     """Runs a diamond square algorithm and returns an array (or list) with the landscape
 
         An important difference (possibly) between this, and other implementations of the 
