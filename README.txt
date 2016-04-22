@@ -13,6 +13,7 @@ Best,
 
 Using it in a python project is easy:
 ------------------------------------------------------
+```python
 import DiamondSquare as DS
 
 #make a height map of size 16x20, with values ranging from 1 to 100, with moderate roughness
@@ -34,7 +35,7 @@ same_map_2 = DS.diamond_square((15,15), 1, 100, 0.8, random_seed=1.234, AS_NP_AR
 np.array_equal(same_map_1, same_map_2)
 different_map = DS.diamond_square((15,15), 1, 100, 0.8, random_seed=1.2341, AS_NP_ARRAY=True)
 np.array_equal(same_map_1, different_map)
-
+```
 ------------------------------------------------------
 
 FUNCTION SIGNATURE
