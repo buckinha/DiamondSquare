@@ -6,7 +6,7 @@
 import random
 import numpy as np
 
-def diamond_square(desired_size, min_height, max_height, roughness, random_seed=None, AS_NP_ARRAY=False):
+def diamond_square(desired_size, min_height, max_height, roughness, random_seed=None, AS_NP_ARRAY=False, USE_NEW_SQUARE_STEP=False):
     """Runs a diamond square algorithm and returns an array (or list) with the landscape
 
         An important difference (possibly) between this, and other implementations of the 
@@ -22,7 +22,7 @@ def diamond_square(desired_size, min_height, max_height, roughness, random_seed=
 
         this_iteration_roughness = roughness**iteration_number
 
-    where the first iteration has iteration_number = 0. Thus, the first roughness value 
+    where the first iteration has iteration_number = 0. The first roughness value 
     actually used (in the very first diamond and square step) is roughness**0 = 1. Thus,
     the values for those first diamond and square step entries will be entirely random.
     This effectively means that I am seeding with A 3x3 grid of random values, rather 
@@ -106,9 +106,16 @@ def diamond_square(desired_size, min_height, max_height, roughness, random_seed=
     #do the algorithm
     for i in range(iterations):
         r = roughness**i
-        step_size = DS_size / 2**(i)
+
+        step_size = (DS_size-1) / 2**(i)
+
         diamond_step(DS_array, step_size, r)
-        square_step(DS_array, step_size, r)
+
+        if USE_NEW_SQUARE_STEP: 
+            square_step(DS_array, step_size, r)
+        else:
+            square_step_original(DS_array, step_size, r)
+
 
 
     #rescale the array to fit the min and max heights specified
@@ -211,7 +218,65 @@ def square_step(DS_array, step_size, roughness):
 
     """
 
+    #doing this in two steps: the first, where the every other column is skipped
+    # and the second, where every other row is skipped. For each, iterations along
+    # the half-steps go vertically or horizontally, respectively.
+
+
+    #set the half-step for the calls to square_displace
     half_step = step_size/2
+
+    #vertical step
+    steps_x_vert = range(  half_step , DS_array.shape[0]  ,   step_size)
+    steps_y_vert = range(  0         , DS_array.shape[1]  ,   step_size)
+
+    #horizontal step
+    steps_x_horiz = range(  0         , DS_array.shape[0] ,   step_size)
+    steps_y_horiz = range(  half_step , DS_array.shape[1] ,   step_size)
+
+
+    for i in steps_x_horiz:
+        for j in steps_y_horiz:
+            DS_array[i,j] = square_displace(DS_array, i, j, half_step, roughness)
+
+    for i in steps_x_vert:
+        for j in steps_y_vert:
+            DS_array[i,j] = square_displace(DS_array, i, j, half_step, roughness)
+
+
+
+    #ORIGINAL METHOD, which iterates over a lot of extra cells
+    # steps_x = range(          0, DS_array.shape[0], half_step)
+    # steps_y = range(          0, DS_array.shape[0], half_step)
+
+    # for i in steps_x:
+    #     for j in steps_y:
+    #         if DS_array[i,j] == -1.0:
+    #             DS_array[i,j] = square_displace(DS_array, i, j, half_step, roughness)
+
+def square_step_original(DS_array, step_size, roughness):
+    """Does the square step for a given iteration.
+
+    During the diamond step, the diagonally adjacent cells are filled:
+
+     Value    FILLING    Value    FILLING   Value   ...
+
+    FILLING   DIAMOND   FILLING   DIAMOND  FILLING  ...
+ 
+     Value    FILLING    Value    FILLING   Value   ...
+
+      ...       ...       ...       ...      ...    ...
+
+    So we'll step with increment step_size over BOTH axes
+
+    """
+
+    #doing this in two steps: the first, where the every other column is skipped
+    # and the second, where every other row is skipped. For each, iterations along
+    # the half-steps go vertically or horizontally, respectively.
+
+    half_step = step_size/2
+
     steps_x = range(          0, DS_array.shape[0], half_step)
     steps_y = range(          0, DS_array.shape[0], half_step)
 
@@ -219,7 +284,6 @@ def square_step(DS_array, step_size, roughness):
         for j in steps_y:
             if DS_array[i,j] == -1.0:
                 DS_array[i,j] = square_displace(DS_array, i, j, half_step, roughness)
-
 
 #defines the midpoint displacement for the diamond step
 def diamond_displace(DS_array, i, j, half_step, roughness):
