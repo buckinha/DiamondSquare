@@ -1,4 +1,5 @@
-#DiamondSquare.py
+# DiamondSquare.py
+
 This is a python implementation of the classic diamond-square algorithm for 2-D height maps,
 which are often used for terrain generation and random map creation. 
 
@@ -10,6 +11,9 @@ If you use it for something interesting, I'd love to hear about it.
 Best,
 -HKB-
 
+### Installation
+* Install using pip: `pip install hkb_diamondsquare`
+* Install from source `git clone git@github.com:buckinha/DiamondSquare.git`
 
 
 ### Using it in a python project is easy:
