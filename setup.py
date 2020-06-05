@@ -24,5 +24,6 @@ setup(
     install_requires=get_requirements(),
     license='The MIT License (MIT)',
     long_description="Python library for running the Diamond Square terrain generation algorithm"
+
 )
 
