@@ -2,3 +2,5 @@
 *.pytest_cache
 env/*
 .idea/*
+dist/*
+hkb_diamondsquare.egg-info/*
