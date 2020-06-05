@@ -48,11 +48,18 @@ np.allclose(same_map_1, different_map)
 # prints False
 ```
 
-You can also vizualize your landscape using the following:
+You can also vizualize your landscape using Seaborn (not included by default) as shown:
 ```python
 from hkb_diamondsquare import DiamondSquare
+import seaborn
+
+def show_terrain_2D(terrain_array):
+
+    seaborn.set()
+    ax = seaborn.heatmap(terrain_array)
+
 map = DiamondSquare.diamond_square(shape=(50,50), min_height=0, max_height=10, roughness=0.3)
-DiamondSquare.show_terrain_2D(map)
+show_terrain_2D(map)
 ```
 
 

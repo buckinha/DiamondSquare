@@ -6,13 +6,7 @@
 import random
 import math
 import numpy as np
-import seaborn
 
-
-def show_terrain_2D(terrain_array):
-
-    seaborn.set()
-    ax = seaborn.heatmap(terrain_array)
 
 
 def diamond_square(shape: (int, int),
